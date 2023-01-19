@@ -1,6 +1,9 @@
 # VMware Cluster Connect CLI
 The VMware Cluster Connect CLI (`vcc`) allows users to download binaries from [customerconnect.vmware.com](customerconnect.vmware.com). It uses the [vmware-customer-connect-sdk](https://github.com/vmware-labs/vmware-customer-connect-sdk) which was heavily inspired by [vmw-sdk](https://github.com/apnex/vmw-sdk) by [apnex](https://github.com/apnex).
 
+**WARNING:** This CLI is experimental, with no guarantee of API stability.
+
+
 ## Installation
 
 `vcc` is a go binary and can be downloaded from the [releases](https://github.com/vmware-labs/vmware-customer-connect-cli/releases) page.
