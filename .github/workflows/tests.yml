@@ -1,0 +1,44 @@
+---
+name: tests
+
+on: [push, pull_request]
+
+env:
+  VCC_USER: ${{ secrets.VCC_USER }}
+  VCC_PASS: ${{ secrets.VCC_PASS }}
+
+jobs:
+  tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19.3
+
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Run Golang Tests
+      run: go test -v ./...
+
+    - name: Setup BATS
+      if: runner.os != 'windows'
+      run: |
+        set -e
+
+        if [ -n "$GITHUB_RUN_ID" ]; then
+            export GITHUB_API_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+        fi
+
+        git clone https://github.com/bats-core/bats-core.git && bats-core/install.sh $HOME
+
+    - name: Run BATS Tests
+      if: runner.os != 'windows'
+      run: |
+        export PATH=${PATH}:/home/runner/bin
+        # Retry hack to attempt test 3 times
+        bats test/bats

@@ -1,0 +1,14 @@
+---
+product: vmware_tools
+subproduct: vmtools
+version: "11.*"
+filename_globs:
+  - "VMware-Tools-darwin-*.tar.gz"
+  - "VMware-Tools-darwin-*.zip"
+---
+product: vmware_tools
+subproduct: vmtools
+version: "10.*"
+filename_globs:
+  - "VMware-Tools-other-*.tar.gz"
+---

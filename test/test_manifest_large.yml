@@ -1,0 +1,13 @@
+---
+product: vmware_tanzu_kubernetes_grid
+subproduct: tkg
+version: "1.3*"
+filename_globs:
+  - "photon*.ova"
+---
+product: vmware_tanzu_kubernetes_grid
+subproduct: tkg
+version: "1.3.0"
+filename_globs:
+  - "ubuntu*.ova"
+---
