@@ -1,7 +1,7 @@
 # VMware Cluster Connect CLI
 The VMware Cluster Connect CLI (`vcc`) allows users to download binaries from [customerconnect.vmware.com](customerconnect.vmware.com). It uses the [vmware-customer-connect-sdk](https://github.com/vmware-labs/vmware-customer-connect-sdk) which was heavily inspired by [vmw-sdk](https://github.com/apnex/vmw-sdk) by [apnex](https://github.com/apnex).
 
-**WARNING:** This CLI is experimental, with no guarantee of API stability.
+**WARNING:** This CLI is experimental, with no guarantee of future API stability.
 
 
 ## Installation
@@ -14,7 +14,7 @@ To make it available to all users `sudo mv vcc-<os>-<version> /usr/local/bin/vcc
 
 
 ## Authentication
-The Customer Connect username and password can either be passed in as command argurements using `--user` and `--pass` or can be exported as environmental variables, making sure to encause passwords in a single quote in case of special charactors. 
+The Customer Connect username and password can either be passed in as command arguments using `--user` and `--pass` or can be exported as environmental variables, making sure to encase passwords in a single quote in case of special characters. 
 
 Example below for Linux/Mac:
 
@@ -76,7 +76,7 @@ filename_globs:
 
 ## Known Issues
 
-- When working in a shell if you add a * to the filename arguement of the download command and you are in a directory where a file matches the pattern, your shell will replace the * to pass in the full file name. This can be worked around by wrapping the file name in single quotes, or by defining the download in a manifest yaml.
+- When working in a shell if you add a * to the filename argument of the download command and you are in a directory where a file matches the pattern, your shell will replace the * to pass in the full file name. This can be worked around by wrapping the file name in single quotes, or by defining the download in a manifest yaml.
 - Some products such as horizon will not return the latest version when only a glob is provided. This is because the product switched naming standards meaning it breaks the sort of the version.
 - Some product descriptions don't display fully. This is especially true for the horizon products as they are inconsistently named, meaning it's difficult to extract the version number without taking out part of the product name.
 
@@ -100,7 +100,7 @@ Ensure that your IDE exports `VCC_USER` and `VCC_PASS` to be able to run tests a
 
 Please see our [Code of Conduct](CODE-OF-CONDUCT.md) and [Contributors guide](CONTRIBUTING.md).
 
-The vmware-customer-connect-cls project team welcomes contributions from the community. Before you start working with vmware-customer-connect-cli, please read and sign our Contributor License Agreement [CLA](https://cla.vmware.com/cla/1/preview). If you wish to contribute code and you have not signed our contributor license agreement (CLA), our bot will prompt you to do so when you open a Pull Request. For any questions about the CLA process, please refer to our [FAQ]([https://cla.vmware.com/faq](https://cla.vmware.com/faq)).
+The vmware-customer-connect-cli project team welcomes contributions from the community. Before you start working with vmware-customer-connect-cli, please read and sign our Contributor License Agreement [CLA](https://cla.vmware.com/cla/1/preview). If you wish to contribute code and you have not signed our contributor license agreement (CLA), our bot will prompt you to do so when you open a Pull Request. For any questions about the CLA process, please refer to our [FAQ]([https://cla.vmware.com/faq](https://cla.vmware.com/faq)).
 
 ## License
 Apache License 
