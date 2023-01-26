@@ -6,7 +6,6 @@ package api
 import (
 	"fmt"
 	"strings"
-	// "github.com/vmware-labs/vmware-customer-connect-sdk/sdk"
 )
 
 func ListVersions(slug, subProduct string) (data string, err error) {
@@ -18,6 +17,5 @@ func ListVersions(slug, subProduct string) (data string, err error) {
 	data = strings.Join(versionArray[:], "' '")
 	data = fmt.Sprintf("'%s'", data)
 
-	// fmt.Println(versionString)
 	return
 }

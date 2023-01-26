@@ -56,12 +56,12 @@ func downloadFromManifest() {
 	fmt.Printf("Opening manifest file: %s\n", manifestFile)
 	manifestArray, err := manifest.ProcessFile(manifestFile)
 	if err == manifest.ErrorFileDoesNotExist {
-		fmt.Printf("File %s does not exist", manifestFile)
+		fmt.Fprintf(os.Stderr, "File %s does not exist\n", manifestFile)
 		os.Exit(1)
 	} else if err == manifest.ErrorInvalidSpec {
 		os.Exit(1)
 	} else if err != nil {
-		fmt.Printf("Parsing file failed with error: %e\n", err)
+		fmt.Fprintf(os.Stderr, "Parsing file failed with error: %e\n", err)		
 		os.Exit(1)
 	}
 

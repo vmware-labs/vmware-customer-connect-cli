@@ -7,13 +7,22 @@ setup() {
   export_errors
 }
 
-@test "get files successfully" {
+@test "get files successfully_text" {
   run $VCC_CMD get files -p vmware_tools -s vmtools -v 11.3.0
   echo $output
   [[ "$output" == *"  11.3.0"* ]]
   [[ "$output" == *"Eula Accepted:"* ]]
   [[ "$output" == *"Eligable to Download:  true"* ]]
   [[ "$output" == *"VMware-Tools-windows-11.3.0-18090558.zip"* ]]
+  [ "$status" -eq 0 ]
+}
+
+@test "get files successfully_json" {
+  run $VCC_CMD get files -p vmware_tools -s vmtools -v 11.3.0 --format json
+  echo $output
+  [[ "$output" == *"eula_accepted"* ]]
+  [[ "$output" == *"eligible_to_download"* ]]
+  [[ "$output" == *"sha256checksum"* ]]
   [ "$status" -eq 0 ]
 }
 

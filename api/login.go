@@ -26,7 +26,7 @@ func EnsureLogin(username, password string) (err error) {
 		if err != nil {
 			return
 		}
-		fmt.Println("Logging in...")
+		fmt.Fprintf(os.Stderr, "Logging in...\n")
 		authenticatedClient, err = sdk.Login(username, password, jar)
 		if err == nil {
 			err = jar.Save()
