@@ -3,9 +3,15 @@
 
 package api
 
+import (
+	"github.com/vmware-labs/vmware-customer-connect-sdk/sdk"
+)
+
+
 func GetEula(slug, subProduct, version, username, password string) (data string, err error) {
-	var downloadGroup, productID string
-	downloadGroup, productID, err = basicClient.GetDlgProduct(slug, subProduct, version)
+	var productID string
+	var apiVersions sdk.APIVersions
+	productID, apiVersions, err = basicClient.GetDlgProduct(slug, subProduct, version)
 	if err != nil {
 		return
 	}
@@ -13,6 +19,6 @@ func GetEula(slug, subProduct, version, username, password string) (data string,
 		return
 	}
 
-	data, err = authenticatedClient.FetchEulaUrl(downloadGroup, productID)
+	data, err = authenticatedClient.FetchEulaUrl(apiVersions.Code, productID)
 	return
 }

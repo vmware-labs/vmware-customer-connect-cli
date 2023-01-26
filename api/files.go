@@ -14,20 +14,20 @@ type Availability struct {
 	EligibleToDownload bool
 }
 
-func ListFiles(slug, subProduct, version, username, password string) (data [][]string, availability Availability, err error) {
+func ListFiles(slug, subProduct, version, username, password string) (data [][]string, availability Availability, apiVersions sdk.APIVersions, err error) {
 	if err = EnsureLogin(username, password); err != nil {
 		return
 	}
 
-	var downloadGroup, productID string
-	downloadGroup, productID, err = authenticatedClient.GetDlgProduct(slug, subProduct, version)
+	var productID string
+	productID, apiVersions, err = authenticatedClient.GetDlgProduct(slug, subProduct, version)
 	if err != nil {
 		return
 	}
 
 	fmt.Println("Getting DLG Details")
 	var dlgDetails sdk.DlgDetails
-	dlgDetails, err = authenticatedClient.GetDlgDetails(downloadGroup, productID)
+	dlgDetails, err = authenticatedClient.GetDlgDetails(apiVersions.Code, productID)
 	if err != nil {
 		return
 	}

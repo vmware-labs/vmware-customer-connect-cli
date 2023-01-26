@@ -25,13 +25,14 @@ or the --user and --pass flags should be added`,
 	Example: getFiles,
 	Run: func(cmd *cobra.Command, args []string) {
 		validateCredentials(cmd)
-		files, availability, err := api.ListFiles(slug, subProduct, version, username, password)
+		files, availability, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password)
 		if err != nil {
 			handleErrors(err)
 		}
 		headings := []string{"Filename", "Size", "Build number", "Description"}
 
-		fmt.Printf("\nEula Accepted:         %t\n", availability.EulaAccepted)
+		fmt.Printf("\nVersion:               %s\n", apiVersions.MinorVersion)
+		fmt.Printf("Eula Accepted:         %t\n", availability.EulaAccepted)
 		fmt.Printf("Eligable to Download:  %t\n\n", availability.EligibleToDownload)
 		presenters.RenderTable(headings, files)
 	},

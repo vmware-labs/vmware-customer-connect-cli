@@ -10,6 +10,7 @@ setup() {
 @test "get files successfully" {
   run $VCC_CMD get files -p vmware_tools -s vmtools -v 11.3.0
   echo $output
+  [[ "$output" == *"  11.3.0"* ]]
   [[ "$output" == *"Eula Accepted:"* ]]
   [[ "$output" == *"Eligable to Download:  true"* ]]
   [[ "$output" == *"VMware-Tools-windows-11.3.0-18090558.zip"* ]]
