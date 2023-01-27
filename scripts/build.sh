@@ -7,8 +7,14 @@ set -eu
 readonly verison=$1
 readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/.."
 
-env GOOS=linux GOARCH=amd64 go build -o ${script_dir}/builds/vcc-linux-v${verison}
+env GOOS=linux GOARCH=amd64 go build \
+  -ldflags="-X 'github.com/vmware-labs/vmware-customer-connect-cli/cmd.cliVersion=${verison}'" \
+  -o ${script_dir}/builds/vcc-linux-v${verison}
 
-env GOOS=darwin GOARCH=amd64 go build -o ${script_dir}/builds/vcc-darwin-v${verison}
+env GOOS=darwin GOARCH=amd64 go build \
+  -ldflags="-X github.com/vmware-labs/vmware-customer-connect-cli/cmd.cliVersion=${verison}" \
+  -o ${script_dir}/builds/vcc-darwin-v${verison}
 
-env GOOS=windows GOARCH=amd64 go build -o ${script_dir}/builds/vcc-windows-v${verison}.exe
+env GOOS=windows GOARCH=amd64 go build \
+  -ldflags="-X github.com/vmware-labs/vmware-customer-connect-cli/cmd.cliVersion=${verison}" \
+  -o ${script_dir}/builds/vcc-windows-v${verison}.exe
