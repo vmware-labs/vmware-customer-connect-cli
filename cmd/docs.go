@@ -36,8 +36,8 @@ product: vmware_tools
 subproduct: vmtools
 version: "*"
 filename_globs:
-	- "VMware-Tools-darwin-*.tar.gz"
-	- "VMware-Tools-darwin-*.zip"
+  - "VMware-Tools-darwin-*.tar.gz"
+  - "VMware-Tools-darwin-*.zip"
 ---
 # This section will download the latest minor release from major version 10
 # The single glob pattern will download 2 files
@@ -45,5 +45,5 @@ product: vmware_tools
 subproduct: vmtools
 version: "10.*"
 filename_globs:
-	- "VMware-Tools-other-*"
+  - "VMware-Tools-other-*"
 ---`
