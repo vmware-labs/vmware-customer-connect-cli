@@ -10,6 +10,7 @@ on:
 env:
   VCC_USER: ${{ secrets.VCC_USER }}
   VCC_PASS: ${{ secrets.VCC_PASS }}
+  GOPROXY: direct 
 
 jobs:
   tests:

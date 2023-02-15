@@ -91,7 +91,7 @@ Tests assume that you have exported credentials as environmental variables and a
 
 ## Development
 
-Update the SDK `go get -u github.com/vmware-labs/vmware-customer-connect-sdk`
+Update the SDK `GOPROXY=direct go get -u github.com/vmware-labs/vmware-customer-connect-sdk`
 
 Ensure that your IDE exports `VCC_USER` and `VCC_PASS` to be able to run tests and debug.
 
