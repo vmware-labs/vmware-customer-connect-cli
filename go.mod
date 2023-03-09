@@ -8,7 +8,7 @@ require (
 	github.com/orirawlings/persistent-cookiejar v0.3.2
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
-	github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230215141426-bb5c72e4300b
+	github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230309113424-61abb590d190
 	gopkg.in/yaml.v3 v3.0.1
 )
 

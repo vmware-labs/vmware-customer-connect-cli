@@ -119,6 +119,8 @@ github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230126153716-beb9653
 github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230126153716-beb965360dd7/go.mod h1:p33iDNybVbqWNJVGsquTjV0f9SknAe9BdHqq0zA2u64=
 github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230215141426-bb5c72e4300b h1:I2yVgj0cIQdnGYZ4bWWBiTm9qjWLC49vT2UneXiINfU=
 github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230215141426-bb5c72e4300b/go.mod h1:p33iDNybVbqWNJVGsquTjV0f9SknAe9BdHqq0zA2u64=
+github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230309113424-61abb590d190 h1:4zHYk5cV1/p80C6AOvPblEHTjwycXRWOqn+4km1Z4Us=
+github.com/vmware-labs/vmware-customer-connect-sdk v0.0.0-20230309113424-61abb590d190/go.mod h1:p33iDNybVbqWNJVGsquTjV0f9SknAe9BdHqq0zA2u64=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
 go.opencensus.io v0.22.0/go.mod h1:+kGneAE2xo2IficOXnaByMWTGM9T73dGwxeWcUqIpI8=
 go.opencensus.io v0.22.2/go.mod h1:yxeiOL68Rb0Xd1ddK5vPZ/oVn4vY4Ynel7k9FzqtOIw=
