@@ -40,9 +40,9 @@ func TestGetFilesInvalidVersion(t *testing.T) {
 }
 
 func TestGetFilesNotEntitled(t *testing.T) {
-	files, availability, apiVersions, err := ListFilesArray("vmware_nsx_t_data_center", "nsx-t", "3.1.3.1", testing_user, testing_pass)
+	files, availability, apiVersions, err := ListFilesArray("vmware_nsx_t_data_center", "nsx-t", "3.2.3.1", testing_user, testing_pass)
 	assert.Nil(t, err)
 	assert.Greater(t, len(files), 5, "Expected response to contain at least 5 items")
-	assert.Equal(t, apiVersions.MinorVersion, "3.1.3.1")
+	assert.Equal(t, apiVersions.MinorVersion, "3.2.3.1")
 	assert.False(t, availability.EligibleToDownload)
 }
