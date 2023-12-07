@@ -10,9 +10,9 @@ import (
 	"github.com/vmware-labs/vmware-customer-connect-sdk/sdk"
 )
 
-func ListSubProducts(slug string) (data [][]string, err error) {
+func ListSubProducts(slug, dlgType string) (data [][]string, err error) {
 	var subProducts []sdk.SubProductDetails
-	subProducts, err = basicClient.GetSubProductsSlice(slug)
+	subProducts, err = basicClient.GetSubProductsSlice(slug, dlgType)
 	if err != nil {
 		return
 	}

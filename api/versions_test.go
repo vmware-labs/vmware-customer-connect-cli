@@ -12,19 +12,19 @@ import (
 )
 
 func TestGetVersions(t *testing.T) {
-	versions, err := ListVersions("vmware_tools", "vmtools")
+	versions, err := ListVersions("vmware_tools", "vmtools", "PRODUCT_BINARY")
 	require.Nil(t, err)
 	assert.Greater(t, len(versions), 10, "Expected response to contain at least 10 items")
 }
 
 func TestGetVersionsInvalidSlug(t *testing.T) {
-	versions, err := ListVersions("tools", "vmtools")
+	versions, err := ListVersions("tools", "vmtools", "PRODUCT_BINARY")
 	assert.ErrorIs(t, err, sdk.ErrorInvalidSlug)
 	assert.Empty(t, versions, "Expected response to be empty")
 }
 
 func TestGetVersionsInvalidSubProduct(t *testing.T) {
-	versions, err := ListVersions("vmware_tools", "tools")
+	versions, err := ListVersions("vmware_tools", "tools", "PRODUCT_BINARY")
 	assert.ErrorIs(t, err, sdk.ErrorInvalidSubProduct)
 	assert.Empty(t, versions, "Expected response to be empty")
 }

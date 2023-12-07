@@ -13,13 +13,13 @@ import (
 
 func TestGetSubProducts(t *testing.T) {
 	var products [][]string
-	products, err := ListSubProducts("vmware_tools")
+	products, err := ListSubProducts("vmware_tools", "PRODUCT_BINARY")
 	require.Nil(t, err)
 	assert.NotEmpty(t, products)
 }
 
 func TestGetSubProductsInvalidSlug(t *testing.T) {
-	versions, err := ListVersions("tools", "vmtools")
+	versions, err := ListVersions("tools", "vmtools", "PRODUCT_BINARY")
 	assert.ErrorIs(t, err, sdk.ErrorInvalidSlug)
 	assert.Empty(t, versions, "Expected response to be empty")
 }

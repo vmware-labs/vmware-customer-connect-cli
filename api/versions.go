@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-func ListVersions(slug, subProduct string) (data string, err error) {
-	versionArray, err := basicClient.GetVersionSlice(slug, subProduct)
+func ListVersions(slug, subProduct, dlgType string) (data string, err error) {
+	versionArray, err := basicClient.GetVersionSlice(slug, subProduct, dlgType)
 	if err != nil {
 		return
 	}

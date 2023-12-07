@@ -8,10 +8,10 @@ import (
 )
 
 
-func GetEula(slug, subProduct, version, username, password string) (data string, err error) {
+func GetEula(slug, subProduct, version, username, password, dlgType string) (data string, err error) {
 	var productID string
 	var apiVersions sdk.APIVersions
-	productID, apiVersions, err = basicClient.GetDlgProduct(slug, subProduct, version)
+	productID, apiVersions, err = basicClient.GetDlgProduct(slug, subProduct, version, dlgType)
 	if err != nil {
 		return
 	}

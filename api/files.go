@@ -15,13 +15,13 @@ type Availability struct {
 	EligibleToDownload bool
 }
 
-func ListFiles(slug, subProduct, version, username, password string) (dlgDetails sdk.DlgDetails, apiVersions sdk.APIVersions, err error) {
+func ListFiles(slug, subProduct, version, username, password, dlgType string) (dlgDetails sdk.DlgDetails, apiVersions sdk.APIVersions, err error) {
 	if err = EnsureLogin(username, password); err != nil {
 		return
 	}
 
 	var productID string
-	productID, apiVersions, err = authenticatedClient.GetDlgProduct(slug, subProduct, version)
+	productID, apiVersions, err = authenticatedClient.GetDlgProduct(slug, subProduct, version, dlgType)
 	if err != nil {
 		return
 	}
@@ -35,8 +35,8 @@ func ListFiles(slug, subProduct, version, username, password string) (dlgDetails
 	return
 }
 
-func ListFilesArray(slug, subProduct, version, username, password string) (data [][]string, availability Availability, apiVersions sdk.APIVersions, err error) {
-	dlgDetails, apiVersions, err := ListFiles(slug, subProduct, version, username, password)
+func ListFilesArray(slug, subProduct, version, username, password, dlgType string) (data [][]string, availability Availability, apiVersions sdk.APIVersions, err error) {
+	dlgDetails, apiVersions, err := ListFiles(slug, subProduct, version, username, password, dlgType)
 	if err != nil {
 		return
 	}
