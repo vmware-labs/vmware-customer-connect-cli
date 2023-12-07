@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/vmware-labs/vmware-customer-connect-cli/api"
@@ -22,7 +23,7 @@ or the --user and --pass flags should be added`,
 	Example: getFiles,
 	Run: func(cmd *cobra.Command, args []string) {
 		validateCredentials(cmd)
-		eula, err := api.GetEula(slug, subProduct, version, username, password)
+		eula, err := api.GetEula(slug, subProduct, version, username, password, dlgType)
 		handleErrors(err)
 		fmt.Printf("Open the URL in your browser: %s\n", eula)
 	},
@@ -36,4 +37,6 @@ func init() {
 	eulaCmd.MarkFlagRequired("product")
 	eulaCmd.MarkFlagRequired("sub-product")
 	eulaCmd.MarkFlagRequired("version")
+	eulaCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
+	dlgType = strings.ToUpper(dlgType)
 }

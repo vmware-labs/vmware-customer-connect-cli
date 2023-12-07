@@ -9,6 +9,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/vmware-labs/vmware-customer-connect-cli/api"
@@ -18,11 +19,11 @@ import (
 )
 
 var (
-	manifestFile  string
-	fileName      string
 	acceptEula    bool
-	outputDir     string
+	fileName      string
 	forceDownload bool
+	outputDir     string
+	manifestFile  string
 )
 
 // downloadCmd represents the download command
@@ -45,7 +46,7 @@ or the --user and --pass flags should be added`,
 			downloadFromManifest()
 		} else {
 			fmt.Println("Collecting download payload")
-			downloadPayloads, err := api.FetchDownloadPayload(slug, subProduct, version, fileName, username, password, acceptEula)
+			downloadPayloads, err := api.FetchDownloadPayload(slug, subProduct, version, fileName, username, password, dlgType, acceptEula)
 			handleErrors(err)
 			downloadFiles(downloadPayloads)
 		}
@@ -71,7 +72,7 @@ func downloadFromManifest() {
 			fmt.Printf("Collecting download payload for [%s] [%s] [%s] [%s]\n", manifestSpec.Slug, manifestSpec.SubProduct,
 				manifestSpec.Version, glob)
 			downloadPayloads, err := api.FetchDownloadPayload(manifestSpec.Slug, manifestSpec.SubProduct, manifestSpec.Version,
-				glob, username, password, acceptEula)
+				glob, username, password, dlgType, acceptEula)
 			handleErrors(err)
 			allPayloads = append(allPayloads, downloadPayloads)
 		}
@@ -138,4 +139,6 @@ func init() {
 	downloadCmd.Flags().StringVarP(&outputDir, "output", "o", "", "Directory to download files to")
 	downloadCmd.Flags().BoolVarP(&acceptEula, "accepteula", "a", false, "Filename string")
 	downloadCmd.Flags().BoolVarP(&forceDownload, "forcedownload", "d", false, "(optional) Force a file to be re-downloaded even if it already exists")
+	downloadCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
+	dlgType = strings.ToUpper(dlgType)
 }

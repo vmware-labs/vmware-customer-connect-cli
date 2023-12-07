@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/vmware-labs/vmware-customer-connect-cli/api"
@@ -41,13 +42,13 @@ or the --user and --pass flags should be added`,
 
 		validateCredentials(cmd)
 		if outputFormat == "text" {
-			files, availability, apiVersions, err := api.ListFilesArray(slug, subProduct, version, username, password)
+			files, availability, apiVersions, err := api.ListFilesArray(slug, subProduct, version, username, password, dlgType)
 			if err != nil {
 				handleErrors(err)
 			}
 			printText(apiVersions, availability, files)
 		} else if outputFormat == "json" {
-			dlgDetails, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password)
+			dlgDetails, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password, dlgType)
 			if err != nil {
 				handleErrors(err)
 			}
@@ -91,4 +92,6 @@ func init() {
 	filesCmd.MarkFlagRequired("product")
 	filesCmd.MarkFlagRequired("sub-product")
 	filesCmd.MarkFlagRequired("version")
+	filesCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
+	dlgType = strings.ToUpper(dlgType)
 }
