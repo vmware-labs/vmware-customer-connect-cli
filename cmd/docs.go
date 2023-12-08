@@ -14,6 +14,9 @@ const (
 	getVersions = `  # List of available versions of sub-products vmtools of vmware_tools
   vcc get versions -p vmware_tools -s vmtools`
 
+  getMajorVersions = `  # List of available major versions of product vmware_tools
+  vcc get versions -p vmware_tools`
+
 	getFiles = `  # List of available files of version 11.3.0 of vmware_tools
   vcc get files -p vmware_tools -s vmtools -v 11.3.0`
 
