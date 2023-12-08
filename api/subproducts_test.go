@@ -13,13 +13,21 @@ import (
 
 func TestGetSubProducts(t *testing.T) {
 	var products [][]string
-	products, err := ListSubProducts("vmware_tools")
+	products, err := ListSubProducts("vmware_tools", "PRODUCT_BINARY", "")
 	require.Nil(t, err)
 	assert.NotEmpty(t, products)
 }
 
+func TestGetSubProductsDriversMajorVersion(t *testing.T) {
+	var products [][]string
+	products, err := ListSubProducts("vmware_vsphere", "DRIVERS_TOOLS", "8_0")
+	require.Nil(t, err)
+	assert.NotEmpty(t, products)
+	assert.LessOrEqual(t, len(products), 400)
+}
+
 func TestGetSubProductsInvalidSlug(t *testing.T) {
-	versions, err := ListVersions("tools", "vmtools")
+	products, err := ListSubProducts("tools", "PRODUCT_BINARY", "")
 	assert.ErrorIs(t, err, sdk.ErrorInvalidSlug)
-	assert.Empty(t, versions, "Expected response to be empty")
+	assert.Empty(t, products, "Expected response to be empty")
 }

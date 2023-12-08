@@ -20,10 +20,9 @@ var versionsCmd = &cobra.Command{
 	Long:    "List available versions of a sub-product",
 	Example: getVersions,
 	Run: func(cmd *cobra.Command, args []string) {
-		versionString, err := api.ListVersions(slug, subProduct)
-		if err != nil {
-			handleErrors(err)
-		}
+		dlgType = validateDlgType(dlgType)
+		versionString, err := api.ListVersions(slug, subProduct, dlgType)
+		handleErrors(err)
 		fmt.Println(versionString)
 	},
 }
@@ -34,4 +33,5 @@ func init() {
 	versionsCmd.Flags().StringVarP(&subProduct, "subproduct", "s", "", "Sub Product code")
 	versionsCmd.MarkFlagRequired("product")
 	versionsCmd.MarkFlagRequired("sub-product")
+	versionsCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
 }

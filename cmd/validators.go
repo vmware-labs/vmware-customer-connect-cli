@@ -8,9 +8,21 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"slices"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
+
+func validateDlgType(dlgType string) (returnDlgType string) {
+	returnDlgType = strings.ToUpper(dlgType)
+	allowedFlags := []string{"PRODUCT_BINARY", "DRIVERS_TOOLS", "CUSTOM_ISO", "ADDONS"}
+	if !slices.Contains(allowedFlags, returnDlgType) {
+		fmt.Fprintf(os.Stderr, "\n--type '%s' invalid. Supported types are: (product_binary, drivers_tools, custom_iso, addons)\n", dlgType)
+		os.Exit(1)
+	}
+	return
+}
 
 func validateOutputDir() {
 	if outputDir == "" {

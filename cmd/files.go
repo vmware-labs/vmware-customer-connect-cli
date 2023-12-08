@@ -34,6 +34,7 @@ Either VCC_USER and VCC_PASS environment variable must be set
 or the --user and --pass flags should be added`,
 	Example: getFiles,
 	Run: func(cmd *cobra.Command, args []string) {
+		dlgType = validateDlgType(dlgType)
 		if !(outputFormat == "text" || outputFormat == "json") {
 			fmt.Fprintf(os.Stderr, "Format type %s is not supported\n", outputFormat)
 			os.Exit(128)
@@ -41,16 +42,12 @@ or the --user and --pass flags should be added`,
 
 		validateCredentials(cmd)
 		if outputFormat == "text" {
-			files, availability, apiVersions, err := api.ListFilesArray(slug, subProduct, version, username, password)
-			if err != nil {
-				handleErrors(err)
-			}
+			files, availability, apiVersions, err := api.ListFilesArray(slug, subProduct, version, username, password, dlgType)
+			handleErrors(err)
 			printText(apiVersions, availability, files)
 		} else if outputFormat == "json" {
-			dlgDetails, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password)
-			if err != nil {
-				handleErrors(err)
-			}
+			dlgDetails, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password, dlgType)
+			handleErrors(err)
 			printJson(dlgDetails, apiVersions)
 		}
 	},
@@ -91,4 +88,5 @@ func init() {
 	filesCmd.MarkFlagRequired("product")
 	filesCmd.MarkFlagRequired("sub-product")
 	filesCmd.MarkFlagRequired("version")
+	filesCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
 }

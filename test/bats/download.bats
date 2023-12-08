@@ -31,6 +31,21 @@ teardown() {
   [ -f $TEMP_DIR/VMware-Horizon-Client-*.apk ]
 }
 
+@test "download driver file successfully to temp" {
+  $VCC_CMD logout
+  rm -f $TEMP_DIR/*
+  local cmd="$VCC_CMD download -p vmware_horizon_clients -s cart+andrd_x8632 -v 2106 -f VMware-Horizon-Client-AndroidOS-x86-*-store.apk --accepteula -o $TEMP_DIR"
+  echo $cmd
+  run $cmd
+  echo "$output"
+  [[ "$output" != *"No output directory set."* ]]
+  [[ "$output" == *"Collecting download payload"* ]]
+  [[ "$output" == *"Download started to"* ]]
+  [[ "$output" == *"Download finished"* ]]
+  [ "$status" -eq 0 ]
+  [ -f $TEMP_DIR/VMware-Horizon-Client-*.apk ]
+}
+
 @test "re-download single file successfully to temp" {
   $VCC_CMD logout
   rm -f $TEMP_DIR/*

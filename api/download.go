@@ -7,12 +7,12 @@ import (
 	"github.com/vmware-labs/vmware-customer-connect-sdk/sdk"
 )
 
-func FetchDownloadPayload(slug, subProduct, version, fileName, username, password string, acceptEula bool) (data []sdk.DownloadPayload, err error) {
+func FetchDownloadPayload(slug, subProduct, version, fileName, username, password, dlgType string, acceptEula bool) (data []sdk.DownloadPayload, err error) {
 	if err = EnsureLogin(username, password); err != nil {
 		return
 	}
 
-	data, err = authenticatedClient.GenerateDownloadPayload(slug, subProduct, version, fileName, acceptEula)
+	data, err = authenticatedClient.GenerateDownloadPayload(slug, subProduct, version, fileName, dlgType, acceptEula)
 	if err != nil {
 		return
 	}
