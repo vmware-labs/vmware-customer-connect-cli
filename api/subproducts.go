@@ -4,15 +4,12 @@
 package api
 
 import (
-	// "fmt"
-	// "os"
-
 	"github.com/vmware-labs/vmware-customer-connect-sdk/sdk"
 )
 
-func ListSubProducts(slug, dlgType string) (data [][]string, err error) {
+func ListSubProducts(slug, dlgType, majorVersion string) (data [][]string, err error) {
 	var subProducts []sdk.SubProductDetails
-	subProducts, err = basicClient.GetSubProductsSlice(slug, dlgType)
+	subProducts, err = basicClient.GetSubProductsSlice(slug, dlgType, majorVersion)
 	if err != nil {
 		return
 	}

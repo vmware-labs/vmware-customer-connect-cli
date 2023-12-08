@@ -43,15 +43,11 @@ or the --user and --pass flags should be added`,
 		validateCredentials(cmd)
 		if outputFormat == "text" {
 			files, availability, apiVersions, err := api.ListFilesArray(slug, subProduct, version, username, password, dlgType)
-			if err != nil {
-				handleErrors(err)
-			}
+			handleErrors(err)
 			printText(apiVersions, availability, files)
 		} else if outputFormat == "json" {
 			dlgDetails, apiVersions, err := api.ListFiles(slug, subProduct, version, username, password, dlgType)
-			if err != nil {
-				handleErrors(err)
-			}
+			handleErrors(err)
 			printJson(dlgDetails, apiVersions)
 		}
 	},

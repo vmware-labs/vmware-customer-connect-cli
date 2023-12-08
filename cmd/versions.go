@@ -22,9 +22,7 @@ var versionsCmd = &cobra.Command{
 	Example: getVersions,
 	Run: func(cmd *cobra.Command, args []string) {
 		versionString, err := api.ListVersions(slug, subProduct, dlgType)
-		if err != nil {
-			handleErrors(err)
-		}
+		handleErrors(err)
 		fmt.Println(versionString)
 	},
 }

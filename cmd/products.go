@@ -19,9 +19,7 @@ var productsCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		products, err := api.ListProducts()
-		if err != nil {
-			handleErrors(err)
-		}
+		handleErrors(err)
 		headings := []string{"Product code", "Product description"}
 		presenters.RenderTable(headings, products)
 	},
