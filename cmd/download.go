@@ -9,7 +9,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/vmware-labs/vmware-customer-connect-cli/api"
@@ -37,6 +36,7 @@ Either VCC_USER and VCC_PASS environment variable must be set
 or the --user and --pass flags should be added`,
 	Example: downloadUsage,
 	Run: func(cmd *cobra.Command, args []string) {
+		dlgType = validateDlgType(dlgType)
 		validateCredentials(cmd)
 		validateOutputDir()
 		manifestWorkflow := validateDownloadFlags(cmd)
@@ -140,5 +140,4 @@ func init() {
 	downloadCmd.Flags().BoolVarP(&acceptEula, "accepteula", "a", false, "Filename string")
 	downloadCmd.Flags().BoolVarP(&forceDownload, "forcedownload", "d", false, "(optional) Force a file to be re-downloaded even if it already exists")
 	downloadCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
-	dlgType = strings.ToUpper(dlgType)
 }

@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/vmware-labs/vmware-customer-connect-cli/api"
@@ -21,6 +20,7 @@ var versionsCmd = &cobra.Command{
 	Long:    "List available versions of a sub-product",
 	Example: getVersions,
 	Run: func(cmd *cobra.Command, args []string) {
+		dlgType = validateDlgType(dlgType)
 		versionString, err := api.ListVersions(slug, subProduct, dlgType)
 		handleErrors(err)
 		fmt.Println(versionString)
@@ -34,5 +34,4 @@ func init() {
 	versionsCmd.MarkFlagRequired("product")
 	versionsCmd.MarkFlagRequired("sub-product")
 	versionsCmd.Flags().StringVarP(&dlgType, "type", "t", "product_binary", "(optional) Download type. One of: (product_binary, drivers_tools, custom_iso, addons). Default: product_binary")
-	dlgType = strings.ToUpper(dlgType)
 }
