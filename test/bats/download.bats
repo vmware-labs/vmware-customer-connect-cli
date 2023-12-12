@@ -16,6 +16,48 @@ teardown() {
   echo ""
 }
 
+@test "download driver file successfully to temp" {
+  $VCC_CMD logout
+  rm -f $TEMP_DIR/*
+  # command cannot be stored as a variable because bats does not properly process the speech mark needed for the -v flag
+  run $VCC_CMD download -p vmware_vsphere -t drivers_tools -s vs-mgmt-sdk80u2 -v '*' -f VMware-vSphere-SDK-*.zip --accepteula -o $TEMP_DIR
+  echo "$output"
+  [[ "$output" != *"No output directory set."* ]]
+  [[ "$output" == *"Collecting download payload"* ]]
+  [[ "$output" == *"Download started to"* ]]
+  [[ "$output" == *"Download finished"* ]]
+  [ "$status" -eq 0 ]
+  [ -f $TEMP_DIR/VMware-vSphere-SDK-*.zip ]
+}
+
+@test "download iso file successfully to temp" {
+  $VCC_CMD logout
+  rm -f $TEMP_DIR/*
+  # command cannot be stored as a variable because bats does not properly process the speech mark needed for the -v flag
+  run $VCC_CMD download -p vmware_vsphere -t custom_iso -s oem-esxi80u2-hitachi -v '*' -f VMware-ESXi-*.iso --accepteula -o $TEMP_DIR
+  echo "$output"
+  [[ "$output" != *"No output directory set."* ]]
+  [[ "$output" == *"Collecting download payload"* ]]
+  [[ "$output" == *"Download started to"* ]]
+  [[ "$output" == *"Download finished"* ]]
+  [ "$status" -eq 0 ]
+  [ -f $TEMP_DIR/VMware-ESXi-*.iso ]
+}
+
+@test "download addon file successfully to temp" {
+  $VCC_CMD logout
+  rm -f $TEMP_DIR/*
+  # command cannot be stored as a variable because bats does not properly process the speech mark needed for the -v flag
+  run $VCC_CMD download -p vmware_vsphere -t addons -s addon_esxi80u2_hitachi -v '*' -f VMware-ESXi-8.0*.zip --accepteula -o $TEMP_DIR
+  echo "$output"
+  [[ "$output" != *"No output directory set."* ]]
+  [[ "$output" == *"Collecting download payload"* ]]
+  [[ "$output" == *"Download started to"* ]]
+  [[ "$output" == *"Download finished"* ]]
+  [ "$status" -eq 0 ]
+  [ -f $TEMP_DIR/VMware-ESXi-8.0*.zip ]
+}
+
 @test "download single file successfully to temp" {
   $VCC_CMD logout
   rm -f $TEMP_DIR/*
@@ -31,20 +73,6 @@ teardown() {
   [ -f $TEMP_DIR/VMware-Horizon-Client-*.apk ]
 }
 
-@test "download driver file successfully to temp" {
-  $VCC_CMD logout
-  rm -f $TEMP_DIR/*
-  local cmd="$VCC_CMD download -p vmware_horizon_clients -s cart+andrd_x8632 -v 2106 -f VMware-Horizon-Client-AndroidOS-x86-*-store.apk --accepteula -o $TEMP_DIR"
-  echo $cmd
-  run $cmd
-  echo "$output"
-  [[ "$output" != *"No output directory set."* ]]
-  [[ "$output" == *"Collecting download payload"* ]]
-  [[ "$output" == *"Download started to"* ]]
-  [[ "$output" == *"Download finished"* ]]
-  [ "$status" -eq 0 ]
-  [ -f $TEMP_DIR/VMware-Horizon-Client-*.apk ]
-}
 
 @test "re-download single file successfully to temp" {
   $VCC_CMD logout
