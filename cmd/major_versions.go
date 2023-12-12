@@ -16,7 +16,7 @@ var majorVersionsSlug string
 var MajorVersionsCmd = &cobra.Command{
 	Use:     "majorversions",
 	Aliases: []string{"v"},
-	Short:   "List available majors versions",
+	Short:   "List available majors versions (for driver_tools, custom_iso, addons)",
 	Long:    "List available major versions to help query drives_tools, custom_isos and addons",
 	Example: getMajorVersions,
 	Run: func(cmd *cobra.Command, args []string) {

@@ -14,8 +14,9 @@ const (
 	getVersions = `  # List of available versions of sub-products vmtools of vmware_tools
   vcc get versions -p vmware_tools -s vmtools`
 
-  getMajorVersions = `  # List of available major versions of product vmware_tools
-  vcc get versions -p vmware_tools`
+  getMajorVersions = `  # List of available major versions of product vmware_tools.
+  # Only used with download types: drivers_tools, custom_isos and addons
+  vcc get majorversions -p vmware_tools`
 
 	getFiles = `  # List of available files of version 11.3.0 of vmware_tools
   vcc get files -p vmware_tools -s vmtools -v 11.3.0`
@@ -26,6 +27,10 @@ const (
 	downloadUsage = `  # Download the latest version of release 11 with a file matching the pattern
   # If using a * in the filename value, make sure to wrap the text in single quotes on linux/macos
   vcc download -p vmware_tools -s vmtools -v 11.* -f 'VMware-Tools-darwin-*.zip' --accepteula
+
+  # To download from from drivers_tools, custom_iso and addons, you must add -t <download type>.
+  # Version can be globbed, as 1 subproduct maps to 1 version, but make sure to wrap the * in a speech mark.
+  vcc download -p vmware_vsphere -t drivers_tools -s vs-mgmt-sdk80u2 -v '*' -f VMware-vSphere-SDK-*.zip --accepteula
 
   # Download files using a manifest file
   # Show an example manifest using 'vcc get manifestexample'
